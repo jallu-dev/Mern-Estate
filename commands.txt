@@ -1,0 +1,19 @@
+--------FRONT----------
+npm create vite@latest client
+cd client
+npm install
+npm run dev
+https://tailwindcss.com/docs/guides/vite
+
+--------BACK----------
+on root folder: 
+git init -y
+npm i express
+npm i nodemon
+"scripts": {
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js"
+},
+npm run dev
+npm i mongoose
+npm i dotenv
