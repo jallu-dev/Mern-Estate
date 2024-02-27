@@ -4,6 +4,7 @@ cd client
 npm install
 npm run dev
 https://tailwindcss.com/docs/guides/vite
+npm i react-router-dom
 
 --------BACK----------
 on root folder: 
