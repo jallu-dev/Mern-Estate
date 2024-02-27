@@ -19,3 +19,5 @@ npm run dev
 npm i mongoose
 npm i dotenv
 add *.env to gitignore file
+
+npm i bcryptjs
