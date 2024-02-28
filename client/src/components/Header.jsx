@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="bg-slate-200 shadow-md flex justify-between items-center mx-auto p-3">
+    <header className="bg-fuchsia-800 shadow-md flex justify-between items-center mx-auto p-3">
       <Link to="/">
         <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-          <span className="text-slate-500">Jallu</span>
-          <span className="text-slate-700">Estate</span>
+          <span className="text-fuchsia-100">JD</span>
+          <span className="text-fuchsia-400">Estate</span>
         </h1>
       </Link>
 
@@ -18,25 +18,16 @@ export default function Header() {
           placeholder="Search..."
           className="bg-transparent outline-none w-24 sm:w-64"
         />
-        <FaSearch />
+        <FaSearch className="text-fuchsia-600" />
       </form>
       <ul className="flex gap-4">
-        <li
-          className="text-slate-700 hidden sm:inline border
-            hover:border-black cursor-pointer px-2 py-1 rounded-md hover:bg-slate-800 hover:text-slate-100"
-        >
+        <li className="text-fuchsia-200 hidden sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
           <Link to="/">Home</Link>
         </li>
-        <li
-          className="text-slate-700 hidden sm:inline border
-            hover:border-black cursor-pointer px-2 py-1 rounded-md hover:bg-slate-800 hover:text-slate-100"
-        >
+        <li className="text-fuchsia-200 hidden sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
           <Link to="/about">About</Link>
         </li>
-        <li
-          className="text-slate-700 sm:inline border
-            hover:border-black cursor-pointer px-2 py-1 rounded-md hover:bg-slate-800 hover:text-slate-100"
-        >
+        <li className="text-fuchsia-200 sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
           <Link to="/sign-in">Sign In</Link>
         </li>
       </ul>

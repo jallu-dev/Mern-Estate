@@ -1,36 +1,82 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({});
+  const [err, setErr] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const onChangeHandler = (e) => {
+    setFormData((curFormData) => {
+      return {
+        ...curFormData,
+        [e.target.id]: e.target.value,
+      };
+    });
+    console.log(formData);
+  };
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const body = JSON.stringify(formData);
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body,
+    });
+    const data = await res.json();
+
+    if (data.success == false) {
+      setErr(data.message);
+      setLoading(false);
+      return;
+    }
+
+    setErr(null);
+    navigate("/sign-in", { replace: true });
+    console.log(data);
+  };
+
   return (
     <div className="sm:max-w-lg mx-auto max-h-96 flex justify-between items-center flex-col p-1">
-      <h1 className="text-center text-slate-600 my-3 font-semibold text-2xl">
+      <h1 className="text-center text-fuchsia-900 my-3 font-bold text-2xl">
         Sign Up
       </h1>
-      <form action="" className="w-50 max-w-lg p-3">
+      <form onSubmit={onSubmitHandler} className="w-50 max-w-lg p-3">
         <input
           type="text"
           placeholder="Username"
-          id="Username"
-          className="p-3 rounded-md w-full my-2 "
+          id="username"
+          onChange={onChangeHandler}
+          className="p-3 rounded-md w-full my-2 outline-none focus:outline-fuchsia-500"
         />
         <input
           type="text"
           placeholder="Email"
-          id="Email"
-          className="p-3 rounded-md w-full my-2 "
+          id="email"
+          onChange={onChangeHandler}
+          className="p-3 rounded-md w-full my-2 outline-none focus:outline-fuchsia-500"
         />
         <input
           type="password"
           placeholder="Password"
-          id="Password"
-          className="p-3 rounded-md w-full my-2 "
+          id="password"
+          onChange={onChangeHandler}
+          className="p-3 rounded-md w-full my-2 outline-none focus:outline-fuchsia-500"
         />
-        <button className="bg-slate-700 text-white hover:opacity-95 cursor-pointer w-full p-3 my-2 rounded-md disabled:opacity-80">
-          SIGN UP
+        <button
+          type="submit"
+          className="bg-fuchsia-800 text-white hover:opacity-95 cursor-pointer w-full p-3 my-2 rounded-md disabled:opacity-80 uppercase"
+          disabled={loading}
+        >
+          {loading ? "..." : "sign up"}
         </button>
-        <button className="bg-red-700 text-white hover:opacity-95 cursor-pointer w-full p-3 my-2 rounded-md disabled:opacity-80">
-          CONTINUE WITH GOOGLE
+        <button className="bg-red-700 text-white hover:opacity-95 cursor-pointer w-full p-3 my-2 rounded-md disabled:opacity-80 uppercase">
+          continue with google
         </button>
       </form>
       <p>
@@ -39,6 +85,8 @@ export default function SignUp() {
           Sign in
         </Link>
       </p>
+
+      {err && <p className="text-red-500 mt-5">{err}</p>}
     </div>
   );
 }

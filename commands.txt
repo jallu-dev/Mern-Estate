@@ -20,4 +20,20 @@ npm i mongoose
 npm i dotenv
 add *.env to gitignore file
 
+
+--------HASH PASSWORD--------
 npm i bcryptjs
+
+--------SETUP PROXY--------
+in client vite.config.js file:
+export default defineConfig({
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        secure: false,
+      },
+    },
+  },
+  plugins: [react()],
+});
