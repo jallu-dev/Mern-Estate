@@ -19,26 +19,31 @@ export default function SignUp() {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    const body = JSON.stringify(formData);
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body,
-    });
-    const data = await res.json();
+    try {
+      setLoading(true);
+      const body = JSON.stringify(formData);
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+        },
+        body,
+      });
+      const data = await res.json();
 
-    if (data.success == false) {
-      setErr(data.message);
+      if (data.success == false) {
+        setErr(data.message);
+        setLoading(false);
+        return;
+      }
+
       setLoading(false);
-      return;
+      setErr(null);
+      navigate("/sign-in", { replace: true });
+    } catch (err) {
+      setLoading(false);
+      setErr(err.message);
     }
-
-    setErr(null);
-    navigate("/sign-in", { replace: true });
-    console.log(data);
   };
 
   return (
@@ -80,7 +85,7 @@ export default function SignUp() {
         </button>
       </form>
       <p>
-        Have an account?{" "}
+        Have an account?&nbsp;
         <Link to="/sign-in" className="text-blue-400">
           Sign in
         </Link>
