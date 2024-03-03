@@ -12,7 +12,7 @@ export default function SignIn() {
     setLoading(true);
     const body = JSON.stringify(formData);
     try {
-      const res = await fetch("/api/auth/signin", {
+      const res = await fetch("/api1/auth/signin", {
         method: "POST",
         body,
         headers: {

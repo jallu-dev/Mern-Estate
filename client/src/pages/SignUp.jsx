@@ -22,7 +22,7 @@ export default function SignUp() {
     try {
       setLoading(true);
       const body = JSON.stringify(formData);
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api1/auth/signup", {
         method: "POST",
         headers: {
           accept: "application/json",

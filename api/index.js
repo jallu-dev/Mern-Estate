@@ -22,13 +22,12 @@ app.listen(3000, () => {
   console.log("server is running 3000");
 });
 
-app.use("/api/user", userRouter);
-app.use("/api/auth", authRouter);
+app.use("/api1/user", userRouter);
+app.use("/api1/auth", authRouter);
 
 app.use((err, req, res, next) => {
   const statuscode = err.statuscode;
   const message = err.message;
-  console.log(err);
   return res.status(statuscode).json({
     success: false,
     message,
