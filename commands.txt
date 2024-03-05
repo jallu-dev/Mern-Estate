@@ -23,6 +23,12 @@ add *.env to gitignore file
 
 --------HASH PASSWORD--------
 npm i bcryptjs
+HASHING THE PASSWORD : const hashedPassword = bcryptjs.hashSync(password, 10);
+COMPARE NORMAL STRING WITH HASHED STRING: const validPassword = await bcryptjs.compare  (
+        STRING,
+        HASHED STRING
+      );
+
 
 --------SETUP PROXY--------
 in client vite.config.js file:
@@ -40,3 +46,10 @@ export default defineConfig({
 
 --------JSON WEB TOKEN--------
 npm i jsonwebtoken
+import jwt from "jsonwebtoken";
+const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+        const { password: pass, ...rest } = validUser._doc;
+        res
+          .cookie("access-token", token, { httpOnly: true })
+          .status(201)
+          .json(rest);
