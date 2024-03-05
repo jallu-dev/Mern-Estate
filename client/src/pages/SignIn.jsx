@@ -9,7 +9,7 @@ import {
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const { err, loading } = useSelector((state) => state.user);
+  const { error, loading } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -36,8 +36,8 @@ export default function SignIn() {
       dispatch(signInSuccess(data));
       navigate("/profile");
       return;
-    } catch (err) {
-      dispatch(signInFailure(err));
+    } catch (error) {
+      dispatch(signInFailure(error.message));
     }
   };
 
@@ -87,7 +87,7 @@ export default function SignIn() {
           Sign up
         </Link>
       </p>
-      {err && <p className="text-red-500 mt-5 self-start">*{err}</p>}
+      {error && <p className="text-red-500 mt-5 self-start">*{error}</p>}
     </div>
   );
 }
