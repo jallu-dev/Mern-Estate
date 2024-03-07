@@ -6,6 +6,7 @@ import {
   signInSuccess,
   signInFailure,
 } from "../redux/user/userSlice.js";
+import OAuth from "../components/OAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -34,7 +35,7 @@ export default function SignIn() {
       }
 
       dispatch(signInSuccess(data));
-      navigate("/profile");
+      navigate("/");
       return;
     } catch (error) {
       dispatch(signInFailure(error.message));
@@ -77,9 +78,7 @@ export default function SignIn() {
         >
           {loading ? "..." : "sign in"}
         </button>
-        <button className="bg-red-700 text-white hover:opacity-95 cursor-pointer w-full p-3 my-2 rounded-md disabled:opacity-80 uppercase">
-          continue with google
-        </button>
+        <OAuth />
       </form>
       <p>
         Don&apos;t Have an account? &nbsp;

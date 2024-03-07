@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -39,7 +40,7 @@ export default function SignUp() {
 
       setLoading(false);
       setErr(null);
-      navigate("/sign-in", { replace: true });
+      navigate("/sign-in");
     } catch (err) {
       setLoading(false);
       setErr(err.message);
@@ -80,9 +81,7 @@ export default function SignUp() {
         >
           {loading ? "..." : "sign up"}
         </button>
-        <button className="bg-red-700 text-white hover:opacity-95 cursor-pointer w-full p-3 my-2 rounded-md disabled:opacity-80 uppercase">
-          continue with google
-        </button>
+        <OAuth />
       </form>
       <p>
         Have an account?&nbsp;

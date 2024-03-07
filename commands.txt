@@ -7,6 +7,10 @@ https://tailwindcss.com/docs/guides/vite
 npm i react-router-dom
 npm install @reduxjs/toolkit react-redux
 npm i redux-persist
+npm install firebase
+
+import.meta.env.VARIABLE_NAME
+
 
 --------BACK----------
 on root folder: 
