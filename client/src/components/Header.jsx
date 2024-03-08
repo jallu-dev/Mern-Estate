@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <header className="bg-fuchsia-800 shadow-md flex justify-between items-center mx-auto p-3">
       <Link to="/">
@@ -21,15 +23,28 @@ export default function Header() {
         <FaSearch className="text-fuchsia-600" />
       </form>
       <ul className="flex gap-4">
-        <li className="text-fuchsia-200 hidden sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="text-fuchsia-200 hidden sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
-          <Link to="/about">About</Link>
-        </li>
-        <li className="text-fuchsia-200 sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
-          <Link to="/sign-in">Sign In</Link>
-        </li>
+        {currentUser ? (
+          <>
+            <li className="text-fuchsia-200 hidden sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="text-fuchsia-200 hidden sm:inline cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
+              <Link to="/about">About</Link>
+            </li>
+          </>
+        ) : (
+          <></>
+        )}
+
+        {currentUser ? (
+          <Link to="/profile">
+            <img src={currentUser.photo} className="rounded-full w-10 h-10" />
+          </Link>
+        ) : (
+          <li className="text-fuchsia-200 cursor-pointer px-2 py-1 rounded-md hover:bg-fuchsia-200 hover:text-fuchsia-800">
+            <Link to="/sign-in">Sign In</Link>
+          </li>
+        )}
       </ul>
     </header>
   );
